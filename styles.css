@@ -1,0 +1,102 @@
+/* Heading text styling */
+h1 {
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 4em;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2, h3, h4 {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+/* Paragraph text styling */
+p {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+body {
+    /* background-color: #AFDDE5;
+    color: #333; */
+    background-color: #F7F2E7; /* Beige background */
+    color: #2E4052; /* Dark blue text */
+}
+
+/* Card format styling */
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Adds spacing between the cards */
+    transition: transform 0.3s ease;
+    text-align: center
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Adds a slight lift effect on hover */
+}
+
+/* Buttons styling */
+button {
+    background-color: #C62828;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color:#FF6F6F;
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    color: #ffffff; /* Ensure text color remains readable */
+}
+
+/* Contact Section: Social Media icons styling */
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds spacing between the icons */
+}
+.social-icon {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
+}
+
+/* Header Section */
+.header-container {
+    background-color: #003366; /* Blue background */
+    color: #ffffff; /* White text */
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* Content/Main body Section */
+.content-container {
+    margin: 0 auto;
+}
+
+/* Footer Section */
+.footer-container {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center
+}
