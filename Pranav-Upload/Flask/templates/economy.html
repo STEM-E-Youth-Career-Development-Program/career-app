@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/mediaqueries.css') }}"
+    />
+
+    <!-- JS -->
+    <script
+      src="{{ url_for('static', filename='js/theme.js') }}"
+      defer
+    ></script>
+    <title>Career App</title>
+
+    <!-- Imported Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <header>
+    <img
+      src="{{ url_for('static', filename='images/logo.png') }}"
+      alt="STEM-E Youth Career Development Program Logo"
+      class="logo"
+    />
+    <h1>CAREER APP</h1>
+    <nav class="navigation">
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <div class="dropdown">
+        <a href="{{ url_for('services') }}">Services ▾</a>
+        <div class="dropdown-content">
+          <a href="{{ url_for('jobs') }}">Job Prospects</a>
+          <a href="{{ url_for('economy') }}">US Economy</a>
+          <a href="{{ url_for('chat') }}">Economic Assistant</a>
+        </div>
+      </div>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      <img
+        id="theme-toggle"
+        src="{{ url_for('static', filename='images/theme_light.png') }}"
+        alt="Toggle Theme"
+        class="theme-toggle"
+      />
+    </nav>
+  </header>
+
+  <body>
+    <div class="content-container">
+      <div class="card">
+        <h2>US Economy</h2>
+        <p>Get insights into the current state of the US economy.</p>
+      </div>
+    </div>
+  </body>
+
+  <footer>
+    <p>&copy; 2024 STEM-E Youth Career Development Program.</p>
+    <p>All Rights Reserved.</p>
+  </footer>
+</html>
