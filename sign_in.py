@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 import pyrebase
-from flask import Flask, request
+from flask import Flask, session, rendertemplate, request, redirect
 
 app = Flask(__name__)
 
@@ -25,13 +25,13 @@ def sign_in(email, password):
     try:
         user = auth.sign_in_with_email_and_password(email, password)
         print("Login successful")
-        # Redirect to home page
-        return "Login successful"
+        session['user'] = email
+        return render_template('home.html')
     except Exception as e:
         print(f"Failed to login: {e}")
         return f"Failed to login"
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST','GET'])
 def login():
     email = request.form.get('email')
     password = request.form.get('password')
