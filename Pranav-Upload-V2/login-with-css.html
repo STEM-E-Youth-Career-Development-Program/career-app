@@ -309,7 +309,6 @@
             wrapper.classList.remove('active');
         });
 
-        // Add shake animation to input boxes on invalid input
         const inputBoxes = document.querySelectorAll('.input-box input');
         inputBoxes.forEach(input => {
             input.addEventListener('invalid', () => {
@@ -320,7 +319,6 @@
             });
         });
 
-        // Add floating effect to input labels
         inputBoxes.forEach(input => {
             input.addEventListener('focus', () => {
                 input.parentElement.classList.add('focus');
