@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <style>
+    body {
+      background-color: #F7F2E7;
+      color: #000000;
+      font-family: "Lato", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    main.content-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 10px;
+      border-radius: 10px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+
+    #chat-window {
+      background-color: #ffffff;
+      border-radius: 10px;
+      height: 100%;
+      padding: 15px;
+      overflow-y: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .user-message {
+      background-color: #004080;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 15px;
+      margin: 5px 0;
+      max-width: 60%;
+      text-align: right;
+      align-self: flex-end;
+      word-wrap: break-word;
+    }
+
+
+    .bot-message {
+      background-color: #7c7e7f;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 15px;
+      margin: 5px 0;
+      max-width: 60%;
+      text-align: left;
+      align-self: flex-start;
+      word-wrap: break-word;
+    }
+
+
+    #chat-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 10px;
+      border-top: 3px solid #003366;
+    }
+
+
+    #chat-input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #004080;
+      font-size: 1em;
+      color: #333;
+      background-color: #ffffff;
+      outline: none;
+      height: 40px;
+      border-radius: 20px;
+    }
+
+
+    #chat-form button {
+      background-color: #004080;
+      color: white;
+      padding: 0 20px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 15px;
+      margin-left: 10px;
+    }
+
+
+    #chat-form button:hover {
+      background-color: #0066CC;
+    }
+
+
+    #chat-window::-webkit-scrollbar {
+      width: 8px;
+    }
+
+
+    #chat-window::-webkit-scrollbar-thumb {
+      background-color: #004080;
+      border-radius: 5px;
+    }
+
+
+
+
+    @media (max-width: 768px) {
+      #chat-window {
+        height: 400px;
+      }
+
+
+      #chat-input,
+      #chat-form button {
+        width: 100%;
+      }
+
+
+      #chat-form {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+
+</head>
+
+
+<body>
+  <header>
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('services') }}">Services</a>
+      <a href="{{ url_for('chat') }}">Chatbot</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+  </header>
+  <main class="content-container">
+    <h1 style="color:#004080">
+      <center>Chat with Our Economic Assistant</center>
+    </h1>
+    <div id="chat-window" class="chat-window"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" name="prompt" placeholder="Type your message here..." required>
+      <button type="submit">Send</button>
+    </form>
+  </main>
+  <script>
+    // Scroll to the bottom of the chat window
+    function scrollToBottom() {
+      const chatWindow = document.getElementById('chat-window');
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+  
+    // Handle form submission
+    $("#chat-form").on("submit", function (event) {
+      event.preventDefault();
+      $("#chat-form button").prop('disabled', true);
+  
+      const userMessage = $("#chat-input").val();
+      $("#chat-input").val("");
+      const userDiv = $(`<div class="user-message">${userMessage}</div>`);
+      $("#chat-window").append(userDiv);
+  
+      const botDiv = $(`<div class="bot-message">Loading...</div>`);
+      $("#chat-window").append(botDiv);
+  
+      scrollToBottom();
+  
+      // Send AJAX request to backend
+      $.ajax({
+        url: "/chat",
+        method: "POST",
+        data: { prompt: userMessage },
+        success: function (response) {
+          const cleanResponse = response.response.replace(/<\/?p>/g, '');
+          botDiv.text(cleanResponse);
+          scrollToBottom();
+        },
+        error: function () {
+          botDiv.text("Sorry, an error occurred.");
+          scrollToBottom();
+        },
+        complete: function () {
+          $("#chat-form button").prop('disabled', false);
+        }
+      });
+    });
+  
+    // Enhance CSS dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+      // Improve menu bar
+      const nav = document.querySelector('nav');
+      nav.style.backgroundColor = "#004080";
+      nav.style.padding = "10px 0";
+      nav.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
+  
+      // Style nav links
+      const navLinks = nav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.style.color = "#FFFFFF";
+        link.style.textDecoration = "none";
+        link.style.margin = "0 15px";
+        link.style.fontSize = "1.2em";
+        link.style.fontWeight = "bold";
+        link.style.transition = "color 0.3s ease";
+        link.addEventListener("mouseover", () => {
+          link.style.color = "#FFD700"; // Gold hover effect
+        });
+        link.addEventListener("mouseout", () => {
+          link.style.color = "#FFFFFF";
+        });
+      });
+  
+      // Center the nav items
+      nav.style.display = "flex";
+      nav.style.justifyContent = "center";
+      nav.style.alignItems = "center";
+  
+      // Improve fonts throughout the page
+      document.body.style.fontFamily = "'Roboto', sans-serif"; // Modern font
+      document.body.style.lineHeight = "1.6";
+    });
+  </script>  
+
+
+</body>
+
+
+</html>
