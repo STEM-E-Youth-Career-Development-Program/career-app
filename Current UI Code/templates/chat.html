@@ -164,13 +164,11 @@
     </form>
   </main>
   <script>
-    // Scroll to the bottom of the chat window
     function scrollToBottom() {
       const chatWindow = document.getElementById('chat-window');
       chatWindow.scrollTop = chatWindow.scrollHeight;
     }
   
-    // Handle form submission
     $("#chat-form").on("submit", function (event) {
       event.preventDefault();
       $("#chat-form button").prop('disabled', true);
@@ -185,7 +183,6 @@
   
       scrollToBottom();
   
-      // Send AJAX request to backend
       $.ajax({
         url: "/chat",
         method: "POST",
@@ -205,15 +202,12 @@
       });
     });
   
-    // Enhance CSS dynamically
     document.addEventListener("DOMContentLoaded", function () {
-      // Improve menu bar
       const nav = document.querySelector('nav');
       nav.style.backgroundColor = "#004080";
       nav.style.padding = "10px 0";
       nav.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
   
-      // Style nav links
       const navLinks = nav.querySelectorAll('a');
       navLinks.forEach(link => {
         link.style.color = "#FFFFFF";
@@ -223,20 +217,18 @@
         link.style.fontWeight = "bold";
         link.style.transition = "color 0.3s ease";
         link.addEventListener("mouseover", () => {
-          link.style.color = "#FFD700"; // Gold hover effect
+          link.style.color = "#FFD700";
         });
         link.addEventListener("mouseout", () => {
           link.style.color = "#FFFFFF";
         });
       });
   
-      // Center the nav items
       nav.style.display = "flex";
       nav.style.justifyContent = "center";
       nav.style.alignItems = "center";
   
-      // Improve fonts throughout the page
-      document.body.style.fontFamily = "'Roboto', sans-serif"; // Modern font
+      document.body.style.fontFamily = "'Roboto', sans-serif";
       document.body.style.lineHeight = "1.6";
     });
   </script>  
